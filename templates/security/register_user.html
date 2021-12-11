@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<br>
+<br>
+<center><h2><p class="text-warning bg-dark">SemYU</p></h2></center>
+<br>
+<br>
+<div class="form-floating mb-3">
+  <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" class="form-floating">
+    {{ register_user_form.hidden_tag() }}
+    {{ render_field_with_errors(register_user_form.login, class="form-control") }}
+    {{ render_field_with_errors(register_user_form.email, class="form-control") }}
+    {{ render_field_with_errors(register_user_form.password, type="password", class="form-control") }}
+    {% if register_user_form.password_confirm %}
+      {{ render_field_with_errors(register_user_form.password_confirm, type="password", class="form-control") }}
+    {% endif %}
+    {{ render_field_with_errors(register_user_form.first_name, class="form-control") }}
+    {{ render_field_with_errors(register_user_form.last_name, class="form-control") }}
+    {{ render_field(register_user_form.submit, class='btn btn-warning') }}
+  </form>
+</div>
+{% include "security/_menu.html" %}
+{% endblock %}
+
+
+{% block content_footer %}
+
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<br>
+<br>
+<center><h2><p class="text-warning bg-dark">SemYU</p></h2></center>
+<br>
+<br>
+<div class="form-floating mb-3">
+    <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="form-floating">
+        {{ login_user_form.hidden_tag() }}
+        {{ render_field_with_errors(login_user_form.email, class="form-control") }}
+        {{ render_field_with_errors(login_user_form.password, class='form-control') }}
+        <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Запамяти мене</label>
+            <input name="login_user_form.remember" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        </div>
+        {{ render_field(login_user_form.next, class='form-control') }}
+        {{ render_field(login_user_form.submit, class='btn btn-warning') }}
+    </form>
+    <h5>or</h5>
+    <a href="/register"><button type="button" class="btn btn-warning">Регістрація</button></a>
+</div>
+{% include "security/_menu.html" %}
+
+{% endblock %}
+
+
+{% block content_footer %}
+
+{% endblock %}

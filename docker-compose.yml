@@ -2,7 +2,7 @@ flask:
   build: .
   restart: always
   environment:
-    - FLASK_APP=main.py
+    - FLASK_APP=app.py
     - FLASK_DEBUG=1
     - PYTHONUNBUFFERED=True
   ports:

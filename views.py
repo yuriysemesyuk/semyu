@@ -1,9 +1,8 @@
-from app import app, db, mail
+from app import app, db
 from flask import render_template, request, flash, redirect, url_for
 from forms import RegisterForm
 from models import User
 from flask_security.core import current_user
-
 
 
 
@@ -13,12 +12,9 @@ def login():
         return redirect('/user_page')
     return redirect(url_for('security.login'))
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register')
 def register():
-    if request.method == 'POST':
-        return redirect(url_for('security.login'))
     return redirect(url_for('security.register'))
-
 
 
 @app.errorhandler(404)

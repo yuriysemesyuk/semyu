@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{% endblock %} SemYU
+
+
+{% block content %}
+
+    <div class="small d-flex justify-content-start" style="margin-bottom: 54px">
+        {% for date in calendar %}
+            <div class="col">
+
+                <div class="sticky-top">
+                    <ul class="list-group">
+                        <li class="bg-secondary bg-gradient text-white list-group-item
+                        justify-content-between align-items-center" style="padding: 5px">
+                            <p style="margin: 0px;">
+                                {{ "{0:%d}".format(date)}}.{{"{0:%m}".format(date) }}
+                                    </br>
+                                {{ translate_days_week["{0:%a}".format(date)] }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class=" text-center container list-group bg-light bg-gradient">
+                    {% for time_for_day in calendar[date] %}
+
+                            {% if type(time_for_day) != list %}
+                                <p class="fw-lighter" style="padding: 0; margin: 0;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ time_for_day.time() }}">
+                                    <span class=" text-dark">{{ time_for_day.time().strftime("%H:%M") }}</span>
+                                </p>
+                            {% else %}
+                                 <div class="d-flex flex-nowrap">
+                                    {% for list_servise in time_for_day %}
+                                        <div class="col">
+                                            <div style="padding: 0; margin: 0;">
+                                                {% if type(list_servise[0]) == list %}
+                                                    {% for time_for_day in list_servise.pop(0) %}
+                                                        <p class="text-center text-white" style="padding: 0px; margin: 0;">{{ time_for_day }}}</p>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                            <div class="text-info bg-dark" style="padding: 0px; margin: 0">
+                                                {% for valus_servise in list_servise %}
+                                                    {% if type(valus_servise) == datetime  %}
+                                                        <p class="text-nowrap text-white text-center" style="padding: 0px; margin: 0;">{{ valus_servise.time().strftime("%H:%M") }}</p>
+                                                    {% else %}
+                                                        <p class=" text-nowrap text-center bg-success text-white" style="padding: 0px; margin: 0;">{{ valus_servise }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                 </div>
+                            {% endif %}
+
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

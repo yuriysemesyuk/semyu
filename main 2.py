@@ -3,7 +3,7 @@ from app import app, db
 from user_page.blueprint import user_page
 from confirm_email.blueprint import confirm_email
 
-import view
+import views
 
 app.register_blueprint(user_page, url_prefix='/user_page')
 app.register_blueprint(confirm_email, url_prefix='/confirm_email')

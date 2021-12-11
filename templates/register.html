@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{% endblock %} | Flask app
+
+
+{% block content %}
+<br>
+    <br>
+    <center><h2><p class="text-warning bg-dark">SemYU</p></h2></center>
+    <br>
+    <br>
+<div>
+    {% from "_formhelpers.html" import render_field %}
+    <form method="POST" class="form-floating mb-3">
+        {{ render_field(form.login, type="login", class="form-control", placeholder="login") }}
+        {{ render_field(form.email, type="email", class="form-control", placeholder="name@example.com") }}
+        {{ render_field(form.password, type="password", class="form-control", placeholder="password") }}
+        {{ render_field(form.confirm, type="confirm password", class="form-control", placeholder="confirm password") }}
+        <center><input type=submit class="btn btn-warning" value="Регістрація"></center>
+    </form>
+    <h5>або</h5>
+    <a href="/login"><button type="button" class="btn btn-warning">Увійти</button></a>
+</div>
+{% endblock %}
+
+
+{% block content_footer %}
+
+
+{% endblock %}
